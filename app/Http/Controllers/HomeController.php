@@ -37,8 +37,20 @@ class HomeController extends Controller
     public function ajax(Request $request)
     {
         $user= User::find($request->user_id);
-        $response= auth()->user()->toggleFollow($user);
+        // $response= auth()->user()->toggleFollow($user);
 
-        return response()->json(['success'=>$response]);
+        // return response()->json(['success'=>$response]);
+
+        if(auth()->user()->isFollowing($user))
+        {
+            $response= auth()->user()->unFollow($user);
+            return response()->json(["unfollowed"]);
+        }
+
+        else
+        {
+            $response= auth()->user()->Follow($user);
+            return response()->json(["followed"]);
+        }
     }
 }

@@ -6,6 +6,8 @@
                     <a href="{{ route('user',$user->id) }}">
                     {{ $user->name }}
                     </a>
+
+                    <img class="card-img-top img-responsive" src="/storage/images/{{$user->profile_image}}" alt="">
                 </h5>
                 <small>
                     Following
@@ -17,15 +19,19 @@
                 </small>
                 
             </div>
-            <button class="btn btn-primary">
-                <strong>
-                    @if (auth()->user()->isFollowing($user))
-                        Unfollow
-                    @else
-                        Follow
-                    @endif
-                </strong>
-            </button>
+            @if($user->id===auth()->user()->id)
+                <a href=""><button class="btn btn-primary follow-button">View Profile</button></a>
+            @else
+                <button class="btn btn-primary follow-button" data-id="{{ $user->id }}" >
+                    <strong>
+                        @if(auth()->user()->isFollowing($user))
+                            Unfollow
+                        @else
+                            Follow
+                        @endif
+                    </strong>
+                </button>
+            @endif
         </div>
     @endforeach
 @else

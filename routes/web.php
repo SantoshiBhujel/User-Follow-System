@@ -23,4 +23,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('user/{id}','HomeController@user')->name('user');
 
-Route::get('ajax','HomeController@ajax')->name('ajax');
+Route::post('ajax','HomeController@ajax')->name('ajax');
